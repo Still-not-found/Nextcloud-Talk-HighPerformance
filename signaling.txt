@@ -1,0 +1,85 @@
+To install the nextcloud-spreed-signaling server,we have to install the packages and we need to build it:
+
+*Key note*
+ you should have all the below tools installed in your ubuntu 20.04 server
+  * git
+  * go >= 1.17
+  * make
+  * protobuf-compiler >= 3
+
+apt install git automake golang build-essential python3 -y
+then we have to clone the git repository and start the build process:
+
+cd /opt
+git clone https://github.com/strukturag/nextcloud-spreed-signaling.git
+cd nextcloud-spreed-signaling/
+make build
+then copy the binary to /usr/bin
+
+cp bin/signaling /usr/bin/
+now create a dedicated user:
+
+useradd --system --shell /usr/sbin/nologin --comment "Standalone signaling server for Nextcloud Talk." signaling
+create the server.conf in /etc/signaling/
+
+mkdir /etc/signaling/
+touch /etc/signaling/server.conf
+chown signaling: /etc/signaling/server.conf
+chmod 600 /etc/signaling/server.conf
+and copy the systemd file:
+
+cp dist/init/systemd/signaling.service /etc/systemd/system/signaling.service
+and adjust, so that signaling.service start after janus.service:
+
+nano /etc/systemd/system/signaling.service
+and change under Unit-Section:
+
+[Unit]
+Description=Nextcloud Talk signaling server
+After=janus.service
+save and then:
+
+systemctl daemon-reload
+systemctl enable signaling
+create keys for config:
+
+open /etc/signaling/server.conf with your editor( vi,vim,nano)
+
+vi /etc/signaling/server.conf
+then copy, paste and adjust the following config
+
+[http]
+listen = 127.0.0.1:8080
+[app]
+debug = false
+
+[sessions]
+hashkey = openssl rand -hex 16  # generate a hashkey using this command and paste it here
+blockkey = openssl rand -hex 16 # generate a blockkey using this command and paste it here
+
+[backend]
+backends = backend-1 #here you can add more backends commaseparated backend-1, backend-2, backend-3
+allowall = false
+timeout = 10
+connectionsperhost = 8
+
+[backend-1]
+url = https://nextcloud.signal.com
+secret = openssl rand -hex 16  # generate a key using this command and paste it here
+
+[nats]
+url = nats://localhost:4222
+
+[mcu]
+type = janus
+url = ws://127.0.0.1:8188
+
+[turn]
+apikey = copy and paste the turn_rest_api_key from "/etc/janus/janus.jcfg"
+secret = copy and paste the static-auth-secret key from "/etc/turnserver.conf"
+servers = turn:signaling.nextcloud.com:3478?transport=udp,turn:signaling.nextcloud.com:3478?transport=tcp
+
+
+then start signaling : systemctl start signaling
+
+and check status of the service : systemctl status signaling

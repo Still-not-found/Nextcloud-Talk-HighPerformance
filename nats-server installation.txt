@@ -1,0 +1,23 @@
+For Installing nats-server
+ *Key note you should be a root user*
+
+you have to add its key and its repo:
+
+curl -sL -o /etc/apt/trusted.gpg.d/morph027-nats-server.asc https://packaging.gitlab.io/nats-server/gpg.key
+
+echo "deb [arch=amd64] https://packaging.gitlab.io/nats-server nats main" | tee /etc/apt/sources.list.d/morph027-nats-server.list
+install NATS Server:
+
+sudo apt update
+sudo apt install nats-server
+generate config under /etc/nats/nats.conf
+
+install -d -o nats -g nats /etc/nats
+sudo -u nats echo "listen: 127.0.0.1:4222" > /etc/nats/nats.conf
+start and enable NATS-Server:
+
+sudo systemctl start nats-server && systemctl enable nats-server
+
+After this you should ensure that the nats service is running properly ,
+
+sudo systemctl status nats-server 

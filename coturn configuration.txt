@@ -1,0 +1,37 @@
+Install and config stun/turnserver
+
+you have to install the package coturn:
+
+   sudo apt install coturn
+   enable daemonizing for your turnserver:
+
+   sed -i '/TURNSERVER_ENABLED/c\TURNSERVER_ENABLED=1' /etc/default/coturn
+
+create a random hex key for your nextcloud talk app and signaling server with:
+
+ openssl rand -hex 32
+ and copy it for later use, then edit /etc/turnserver.conf:
+
+ mv /etc/turnserver.conf /etc/turnserver.conf.bak && vi /etc/turnserver.conf
+
+ copy, paste and adjust the following code:
+
+ listening-port=3478
+ fingerprint
+ lt-cred-mech
+ use-auth-secret
+ static-auth-secret=output_of_openssl rand -hex 32
+ realm=signaling.nextcloud.com #you should type your public domain here 
+ total-quota=100
+ bps-capacity=0
+ stale-nonce
+ no-loopback-peers
+ no-multicast-peers
+ and last, restart and enable coturn:
+
+ systemctl restart coturn && systemctl enable coturn
+
+ After restarting the coturn service check the status of the service to 
+ ensure that the service is running propely for that 
+  
+ sudo systemctl status coturn

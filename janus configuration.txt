@@ -1,0 +1,44 @@
+Install and configure janus
+
+You have to add janus Repository of morph027 # this is a source from morph027 for more information on morph027
+you can check "https://morph027.gitlab.io/blog/nextcloud-spreed-signaling/"
+
+Ubuntu 20.04
+add repository key : curl -sL -o /etc/apt/trusted.gpg.d/morph027-janus.asc https://packaging.gitlab.io/janus/gpg.key
+
+add repo: . /etc/lsb-release; echo "deb [arch=amd64] https://packaging.gitlab.io/janus/$DISTRIB_CODENAME $DISTRIB_CODENAME main" | tee /etc/apt/sources.list.d/morph027-janus.list
+apt update
+apt install janus
+Now generate a random api key for turnserver:
+
+openssl rand -base64 16
+and copy the output for later use.
+
+Edit /etc/janus/janus.jcfg
+
+nano /etc/janus/janus.jcfg
+go to section nat and enter your stunserver and port, uncomment full_trickle = true, turn_server with port and type and the generated api key:
+
+you can copy, paste and adjust the following:
+
+stun_server = "127.0.0.1"
+stun_port = 3478
+full_trickle = true
+turn_server = "127.0.0.1"
+turn_port = 3478
+turn_type = "tcp"
+turn_rest_api_key = "openssl rand -base64 16"
+
+then,adjust janus.service, so that it will start after coturn.service:
+
+nano /lib/systemd/system/janus.service
+adjust under Unit-Section:
+
+[Unit]
+Description=Janus WebRTC gateway
+After=coturn.service
+Documentation=https://janus.conf.meetecho.com/docs/index.html
+save, enable and restart janus:
+
+systemctl daemon-reload && systemctl restart janus && systemctl enable janus
+
