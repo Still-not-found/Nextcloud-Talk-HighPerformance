@@ -25,3 +25,7 @@ Step 3: Running or Install NATS Server
 Step 4: Install nextcloud-spreed-signaling Server
 
 Step 5: Install and configure reverse proxy (nginx or apache or caddy).
+
+I have given the installation details of stun/turn server , janus server, Nats server and reverse proxy also
+& if you want to install docker in easy way i have created a Bash script for docker installation 
+if you wnat you can go and check that In my docker repository.
