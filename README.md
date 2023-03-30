@@ -46,10 +46,10 @@ information on the API of the signaling server.
 
 The following tools are required for building the signaling server.
 
-- git
-- go >= 1.18 (usually the last three versions of go are supported)
-- make
-- protobuf-compiler >= 3
+    - git
+    - go >= 1.18 (usually the last three versions of go are supported)
+    - make
+    - protobuf-compiler >= 3
 
 All other dependencies are fetched automatically while building.
 
