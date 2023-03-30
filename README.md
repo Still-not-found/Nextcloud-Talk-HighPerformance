@@ -1,7 +1,5 @@
-# NEXTCLOUD-TALK-HIGH-PERFORMANCE-BACKEND
-Sources:
-Morph27
-Struktur AG
+# Nextcloud-Talk (HIGH PERFORMANCE BACKEND)
+Sources: Morph27 & Struktur AG
 
 MINIMUM HARDWARE REQUIREMENTS FOR NEXTCLOUD-HIGH-PERFORMANCE-BACKEND:
 
@@ -10,9 +8,10 @@ Hardware Requirements:
   8 GB RAM
   32 GB Disk-Space
 
-A Ubuntu server 20.04 
+A Ubuntu server 20.04 or higher versions
 
-Nextcloud with Talk installed and enabled # don't install the HPB in the ubuntu server where you have installed Nextcloud HUB
+Nextcloud with Talk installed and enabled. # don't install the HPB in the ubuntu server where you have installed Nextcloud HUB
+Note: ### For Installing Nextcloud 
 
 A server with a public network interface (port forwarding works too)
 
