@@ -11,7 +11,8 @@ Hardware Requirements:
 A Ubuntu server 20.04 or higher versions
 
 Nextcloud with Talk installed and enabled. # don't install the HPB in the ubuntu server where you have installed Nextcloud HUB
-Note: ### For Installing Nextcloud 
+
+## Note: For Installing Nextcloud https://github.com/Still-not-found/Nextcloud
 
 A server with a public network interface (port forwarding works too)
 
