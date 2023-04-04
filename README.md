@@ -127,6 +127,7 @@ See the `README.md` in the `docker` subfolder for details.
 
 
 #### Docker Compose
+Note: For docker installation you can use my "docker.sh" bash script for easier installation in your ubuntu or debian server.
 
 You will likely have to adjust the Janus command line options depending on the exact network configuration on your server. Refer to [Setup of Janus](#setup-of-janus) and the Janus documentation for how to configure your Janus server.
 
