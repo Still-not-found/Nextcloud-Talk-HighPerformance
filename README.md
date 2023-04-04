@@ -1,6 +1,8 @@
 # Nextcloud-Talk (HIGH PERFORMANCE BACKEND)
 Sources: Morph27 & Struktur AG
 
+Last updated on : 4 , April 23
+
 MINIMUM HARDWARE REQUIREMENTS FOR NEXTCLOUD-HIGH-PERFORMANCE-BACKEND:
 
 Hardware Requirements:
