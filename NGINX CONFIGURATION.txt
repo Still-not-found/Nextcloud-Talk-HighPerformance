@@ -1,4 +1,4 @@
-Nginx can be used as frontend for the standalone signaling server without any additional requirements.
+# Nginx can be used as frontend for the standalone signaling server without any additional requirements.
 
 The backend should be configured separately so it can be changed in a single location and also to allow using multiple backends from a single frontend server.
 
